@@ -1,7 +1,10 @@
 import React from 'react';
 import {Container} from 'reactstrap';
+import DogIndex from './DogIndex';
  
-const Dogs = () => {
+const Dogs = (props) => {
+
+  
 
   return (
     <Container className="App">
@@ -18,6 +21,9 @@ const Dogs = () => {
         <li>Make sure to include some good practice error handling</li>
       </ul>
       <hr />
+      <DogIndex />
+      {/* <img src={props.img} alt='dog'/> */}
+      {/* <button onClick={this.img}>Random Dog</button> */}
     </Container>
   );
 

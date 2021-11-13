@@ -1,6 +1,7 @@
 import React from 'react';
-// import CatIndex from './CatIndex'
+import CatIndex from './CatIndex'
 import { Container } from 'reactstrap';
+
  
 const Cats = () => {
    return (
@@ -19,7 +20,8 @@ const Cats = () => {
          <li>Ensure there are no errors</li>
         </ul>
         <hr />
-       {/* <CatIndex /> */}
+       <CatIndex />
+      
      </Container>
    );
 
