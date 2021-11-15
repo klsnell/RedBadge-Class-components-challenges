@@ -1,49 +1,89 @@
-import React from 'react';
-import { Input } from 'reactstrap';
-// import { useState, useEffect } from 'react';
+// import React from 'react';
+// import { Input } from 'reactstrap';
+// // import { useState, useEffect } from 'react';
 
-export default class SearchIndex extends React.Component {
+// export default class SearchIndex extends React.Component {
+//   constructor() {
+//     super()
+//     this.state = {
+//       things: ['pen', 'marker', 'eraser', 'notebook', 'pencil', 'scissors', 'highlighter', 'stapler', 'paper clip', 'binder', 'hole punch', 'laminator', 'laminating sheets', 'protective sheets', 'index cards'],searchTerm:''
+//     }
+//   }
+
+//   searchFunction() {
+//     fetch(`${this.state.things}`)
+//   }
+
+//   editSearchTerm = (e) => {
+//     this.setState({searchTerm: e.target.value})
+//   }
+
+//   dynamicSearch = () => {
+//     return this.state.things.filter(things => things.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
+//   }
+
+
+
+//   render() {
+//     return (
+//       <div>
+//         <Input placeholder='Search Here' value={this.state.searchTerm} onChange={this.editSearchTerm}/>
+//         <button onClick={() => this.searchFunction()} >Search</button>
+        
+//         <h3>Results:</h3>
+//         <ul>
+//           <li things={this.dynamicSearch}></li>
+          
+//           {this.state.searchTerm}
+//           {this.state.things.map(d => <li key={d.things}>{d.things}</li>)}
+//         </ul>
+//       </div>
+//     )
+//   }
+// }
+
+import React, { Component } from "react";
+import { Input } from "reactstrap";
+class SearchIndex extends React.Component {
   constructor() {
     super()
     this.state = {
-      things: ['pen', 'marker', 'eraser', 'notebook', 'pencil', 'scissors', 'highlighter', 'stapler', 'paper clip', 'binder', 'hole punch', 'laminator', 'laminating sheets', 'protective sheets', 'index cards'],searchTerm:''
+      things: ['pen', 'marker', 'eraser', 'notebook', 'pencil', 'scissors', 'highlighter', 'stapler', 'paper clip', 'binder', 'hole punch', 'laminator', 'laminating sheets', 'protective sheets', 'index cards'], filterThings: []
     }
   }
-
-
-
-  searchFunction() {
-    fetch(`${this.state.things}`)
-  }
-
-  editSearchTerm = (e) => {
-    this.setState({searchTerm: e.target.value})
-  }
-
-  dynamicSearch = () => {
-    return this.state.things.filter(things => things.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
-  }
-
-
-
-  render() {
-    return (
-      <div>
-        <Input placeholder='Search Here' value={this.state.searchTerm} onChange={this.editSearchTerm}/>
-        <button onClick={() => this.searchFunction()} >Search</button>
-        
-        <h3>Results:</h3>
-        <ul>
-          <li things={this.dynamicSearch}></li>
-          
-          {this.state.searchTerm}
-          {this.state.things.map(d => <li key={d.things}>{d.things}</li>)}
-        </ul>
-      </div>
-    )
-  }
+componentDidMount() {
+  this.searchFunction()
 }
-
+  searchFunction = () => {
+    let searchterm = document.getElementById("search").value.toLowerCase()
+    if (searchterm === '') {
+      this.setState({
+        filterThings: this.state.things
+      })
+    } else {
+      let filterResult = this.state.things.filter((things) => {
+        if (things.toLowerCase().includes(searchterm)) {
+          return things
+        }
+      })
+      this.setState ({
+        filterThings: filterResult,
+      })
+      console.log(this.state.filterThings)
+    }}
+    render() {
+      return (
+        <div>
+          <Input id="search" onChange={this.searchFunction} />
+          <h3>Results:</h3>
+          {this.state.filterThings.map((items) => (
+            <p> {items} </p>
+          ))}
+        </div>
+      )
+    }
+  }
+export default SearchIndex;
 
 
 // import React from 'react';
